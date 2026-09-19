@@ -1,0 +1,22 @@
+name = "weekly-planner"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+# D1 database binding. The binding name `DB` is what the app reads via
+# getRequestContext().env.DB. For local dev the database_id can stay as the
+# placeholder below — Miniflare only keys off the binding + database_name.
+# After you run `wrangler d1 create weekly_planner_db`, paste the real
+# database_id here so remote migrations and deploys target the right DB.
+[[d1_databases]]
+binding = "DB"
+database_name = "weekly_planner_db"
+database_id = "3a66015c-80fd-4515-b707-e93621de3b79"
+
+# JWT_SECRET is a secret, not a plaintext var:
+#   - local dev: set it in .dev.vars (see .dev.vars.example)
+#   - production: `wrangler pages secret put JWT_SECRET`
+
+# VAPID public key for Web Push (safe to expose publicly).
+[vars]
+VAPID_PUBLIC_KEY = "BLmfmOo3jSoQX4Ra8y2_FS6AmtfummWRY8zjuhhUqslkT_vkbFGVOYeyjebiOmxGgV1BsnrYS_sAlykocosViAE"

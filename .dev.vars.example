@@ -1,0 +1,6 @@
+# Copy this file to `.dev.vars` for local development.
+# `.dev.vars` is git-ignored and read by Miniflare / next-on-pages during `npm run dev`.
+#
+# Generate a strong secret, e.g.:
+#   node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"
+JWT_SECRET="change-me-to-a-long-random-string"
