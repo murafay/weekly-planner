@@ -63,12 +63,12 @@ export async function POST(req: Request): Promise<Response> {
 
 async function sendResetEmail(to: string, link: string): Promise<void> {
   const { env } = getRequestContext();
-  const key = env.RESEND_API_KEY;
-  if (!key) {
-    console.log('RESEND_API_KEY not set — reset link:', link);
+  const key = env.BREVO_API_KEY;
+  const from = env.MAIL_FROM;
+  if (!key || !from) {
+    console.log('Email not configured (BREVO_API_KEY/MAIL_FROM) — reset link:', link);
     return;
   }
-  const from = env.RESEND_FROM || 'Weekly Planner <onboarding@resend.dev>';
   const html = `
     <div style="font-family:system-ui,sans-serif;max-width:480px;margin:auto">
       <h2>Reset your password</h2>
@@ -82,20 +82,22 @@ async function sendResetEmail(to: string, link: string): Promise<void> {
       safely ignore this email. Or paste this link into your browser:<br>${link}</p>
     </div>`;
 
-  const res = await fetch('https://api.resend.com/emails', {
+  // Brevo transactional email API — one API call, app stays on Cloudflare.
+  const res = await fetch('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${key}`,
+      'api-key': key,
       'content-type': 'application/json',
+      accept: 'application/json',
     },
     body: JSON.stringify({
-      from,
-      to: [to],
+      sender: { email: from, name: env.MAIL_FROM_NAME || 'Weekly Planner' },
+      to: [{ email: to }],
       subject: 'Reset your Weekly Planner password',
-      html,
+      htmlContent: html,
     }),
   });
   if (!res.ok) {
-    console.log('Resend error', res.status, await res.text().catch(() => ''));
+    console.log('Brevo error', res.status, await res.text().catch(() => ''));
   }
 }

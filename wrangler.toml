@@ -17,6 +17,10 @@ database_id = "76809ded-129c-45de-a3b4-d78bb00c590e"
 #   - local dev: set it in .dev.vars (see .dev.vars.example)
 #   - production: `wrangler pages secret put JWT_SECRET`
 
-# VAPID public key for Web Push (safe to expose publicly).
+# Public, non-secret config vars.
+# BREVO_API_KEY is a secret: `wrangler pages secret put BREVO_API_KEY`.
+# MAIL_FROM must be a sender you've verified in Brevo (Senders & IPs).
 [vars]
 VAPID_PUBLIC_KEY = "BLmfmOo3jSoQX4Ra8y2_FS6AmtfummWRY8zjuhhUqslkT_vkbFGVOYeyjebiOmxGgV1BsnrYS_sAlykocosViAE"
+MAIL_FROM = "muhammadrafay588@gmail.com"
+MAIL_FROM_NAME = "Weekly Planner"
