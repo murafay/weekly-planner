@@ -11,7 +11,7 @@ pages_build_output_dir = ".vercel/output/static"
 [[d1_databases]]
 binding = "DB"
 database_name = "weekly_planner_db"
-database_id = "3a66015c-80fd-4515-b707-e93621de3b79"
+database_id = "76809ded-129c-45de-a3b4-d78bb00c590e"
 
 # JWT_SECRET is a secret, not a plaintext var:
 #   - local dev: set it in .dev.vars (see .dev.vars.example)

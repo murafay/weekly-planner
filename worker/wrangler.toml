@@ -11,12 +11,12 @@ crons = ["*/5 * * * *"]
 [[d1_databases]]
 binding = "DB"
 database_name = "weekly_planner_db"
-database_id = "3a66015c-80fd-4515-b707-e93621de3b79"
+database_id = "76809ded-129c-45de-a3b4-d78bb00c590e"
 migrations_dir = "../migrations"
 
 [vars]
 VAPID_PUBLIC_KEY = "BLmfmOo3jSoQX4Ra8y2_FS6AmtfummWRY8zjuhhUqslkT_vkbFGVOYeyjebiOmxGgV1BsnrYS_sAlykocosViAE"
-VAPID_SUBJECT = "mailto:muhammadrafayf23@nutech.edu.pk"
+VAPID_SUBJECT = "mailto:muhammadrafay588@gmail.com"
 
 # Secret (set with: wrangler secret put VAPID_PRIVATE_JWK --config worker/wrangler.toml):
 #   VAPID_PRIVATE_JWK = '{"kty":"EC","crv":"P-256","x":"...","y":"...","d":"..."}'
