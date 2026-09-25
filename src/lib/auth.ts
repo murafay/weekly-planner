@@ -66,6 +66,20 @@ export async function verifyPassword(
   return timingSafeEqual(actual, expected);
 }
 
+// A URL-safe random token (for password-reset links).
+export function generateToken(): string {
+  return toB64url(crypto.getRandomValues(new Uint8Array(32)));
+}
+
+// SHA-256 hex of a string (we store the hash of reset tokens, not the token).
+export async function sha256hex(input: string): Promise<string> {
+  const data = new TextEncoder().encode(input);
+  const digest = await crypto.subtle.digest('SHA-256', data);
+  return [...new Uint8Array(digest)]
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
 function timingSafeEqual(a: Uint8Array, b: Uint8Array): boolean {
   if (a.length !== b.length) return false;
   let diff = 0;

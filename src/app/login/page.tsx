@@ -60,6 +60,12 @@ function LoginForm() {
         />
       </div>
 
+      <div style={{ textAlign: 'right', marginBottom: 14, marginTop: -4 }}>
+        <Link href="/forgot" style={{ fontSize: '0.85rem' }}>
+          Forgot password?
+        </Link>
+      </div>
+
       <button
         className="btn btn-primary"
         style={{ width: '100%' }}
